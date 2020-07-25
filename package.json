@@ -1,0 +1,27 @@
+{
+  "name": "homework12",
+  "version": "1.0.0",
+  "description": "Employee Tracker",
+  "main": "server.js",
+  "scripts": {
+    "test": "N/A",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jusroger/Homework12.git"
+  },
+  "author": "Justin Roger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jusroger/Homework12/issues"
+  },
+  "homepage": "https://github.com/jusroger/Homework12#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "fs": "0.0.1-security",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1",
+    "util": "^0.12.3"
+  }
+}
