@@ -1,30 +1,38 @@
 DROP DATABASE IF EXISTS employee_tracker;
-CREATE DATABASE employee_tracker;
-
+CREATE database employee_tracker;
 USE employee_tracker;
-
 CREATE TABLE department (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  d_name VARCHAR(30)
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
 );
-
 CREATE TABLE role (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(30) NOT NULL,
-  salary DECIMAL UNSIGNED NOT NULL,
-  department_id INT UNSIGNED NOT NULL,
-  INDEX dep_ind (department_id),
-  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30)NOT NULL,
+    salary DECIMAL (10,2) NOT NULL,
+    department_id INT NOT NULL,
+    FOREIGN KEY(department_id) REFERENCES department (id)
 );
-
 CREATE TABLE employee (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  first_name VARCHAR(30) NOT NULL,
-  last_name VARCHAR(30) NOT NULL,
-  role_id INT UNSIGNED NOT NULL,
-  INDEX role_ind (role_id),
-  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE,
-  manager_id INT UNSIGNED,
-  INDEX man_ind (manager_id),
-  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(30) NOT NULL, 
+    last_name VARCHAR(30) NOT NULL,
+    role_id INT NOT NULL, 
+    manager_id INT ,
+    FOREIGN KEY (manager_id) REFERENCES employee(id),
+    FOREIGN KEY(role_id) REFERENCES role(id)
 );
+INSERT INTO department (name) 
+VALUES ("Sales"), ("Customer Service"),("Inventory"), ("Technology"),("Asset Protection");
+INSERT INTO role (title, salary, department_id)
+VALUES ("Sales Lead", 50000 ,1),  
+("Phone Sales", 30000,1),
+("Car Unloader", 25000, 3),
+("Target agent",40000,4),
+("TV Sales", 30000 ,1),
+("Store Manager", 60000,4),
+("Front Security", 30000, 5);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("John", "doe", 1, 1),
+("Bill", "Bob", 2, 1),
+("mike", "jordan",3, 2),
+("Ty","lawson",4, 3);
